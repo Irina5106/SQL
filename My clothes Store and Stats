@@ -1,0 +1,42 @@
+--- Check out my clothes store database here. 
+--- Notice how I've described each piece of code - first I created a store database, then displayed the database ordered by price and used aggregation.
+
+CREATE TABLE my_clothes (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, sex TEXT, price INTEGER);
+
+INSERT INTO my_clothes VALUES (1, "bra", 10, "F", 50.99);
+INSERT INTO my_clothes VALUES (2, "women_shorts", 8, "F", 25.99);
+INSERT INTO my_clothes VALUES (3, "women_panties", 10, "F", 10.99);
+INSERT INTO my_clothes VALUES (4, "men_underwear", 10, "M", 10.99);
+INSERT INTO my_clothes VALUES (5, "men_shorts", 8, "M", 32.99);
+INSERT INTO my_clothes VALUES (6, "men_tshirts", 10, "M", 25.99);
+INSERT INTO my_clothes VALUES (7, "women_shirts", 10, "F", 25.99);
+INSERT INTO my_clothes VALUES (8, "skirts", 10, "F", 27.99);
+INSERT INTO my_clothes VALUES (9, "women_pants", 10, "F", 45.99);
+INSERT INTO my_clothes VALUES (10, "men_pants", 10, "M", 50.99);
+INSERT INTO my_clothes VALUES (11, "dresses", 7, "F", 45);
+INSERT INTO my_clothes VALUES (12, "men_hoodies", 10, "M", 55.99);
+INSERT INTO my_clothes VALUES (13, "women_hoodies", 10, "F", 55.99);
+INSERT INTO my_clothes VALUES (14, "men_jeans", 8, "M", 45.99);
+INSERT INTO my_clothes VALUES (15, "women_jeans", 7, "F", 45.99);
+
+--- display the database ordered by price.
+SELECT * 
+FROM my_clothes
+ORDER BY price;
+
+--- what is the total price of items?
+SELECT SUM (price) FROM my_clothes; 
+
+--- what is the maximum price?
+SELECT MAX(price) FROM my_clothes;
+
+--- what is the avg price of items?
+SELECT AVG(price) FROM my_clothes;
+
+--- what are the 5 items with the highest price?
+SELECT * FROM my_clothes
+ORDER BY price DESC
+LIMIT 5; 
+
+
+
