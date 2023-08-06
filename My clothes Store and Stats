@@ -25,7 +25,7 @@ FROM my_clothes
 ORDER BY price;
 
 --- what is the total price of items?
-SELECT SUM (price) FROM my_clothes; 
+SELECT SUM(price) FROM my_clothes; 
 
 --- what is the maximum price?
 SELECT MAX(price) FROM my_clothes;
