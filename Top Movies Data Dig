@@ -1,4 +1,4 @@
-/* Source: http://www.boxofficemojo.com/alltime/world/ */
+-- Source: http://www.boxofficemojo.com/alltime/world/ 
 
 CREATE TABLE topmovies(
    Rank        INTEGER,
@@ -113,44 +113,60 @@ INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,
 INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,OverseasPct,Year) VALUES (99,'Casino Royale','Sony',599.00,167.40,0.28,431.60,0.72,2006);
 INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,OverseasPct,Year) VALUES (100,'Tangled','BV',591.80,200.80,0.34,391.00,0.66,2010);
 
+-- Select all:
 SELECT * FROM topmovies;
 
+-- Select movies with worldwide amount between 1000 and 2000:
 SELECT title, worldwide FROM topmovies
 WHERE worldwide > 1000 AND worldwide < 2000;
 
+-- Select top 10 domestic gross movies with amount less than 300 OR more than 500:
 SELECT title, domestic FROM topmovies
-WHERE domestic > 100 OR domestic < 200
+WHERE domestic < 300 OR domestic > 500
 ORDER BY title
-LIMIT 5;
+LIMIT 10;
 
+-- Select top 10 movies with domestic and worldwide gross in descending order by worldwide amount:
 SELECT title, domestic, worldwide FROM topmovies
 ORDER BY worldwide DESC
 LIMIT 10;
 
+-- Select average worldwide amount:
 SELECT AVG(worldwide) FROM topmovies;
 
+-- Select average domestic amount:
 SELECT AVG(domestic) FROM topmovies;
 
+-- Select movies with the highest worldwide amount:
 SELECT title, MAX(worldwide)
 FROM topmovies;
 
+-- Select movies with the lowest domestic amount:
 SELECT title, MIN(domestic)
 FROM topmovies;
 
+-- Select top 10 highest grossing movies - domestic and worldwide:
 SELECT title, SUM(worldwide+domestic) AS total
 FROM topmovies
 GROUP BY title
+ORDER BY total DESC
 LIMIT 10;
 
+-- Count movies by studio, show studios with more or equal than 5 movies:
 SELECT studio, COUNT(studio) AS quantity
 FROM topmovies
 GROUP BY studio
 HAVING quantity >= 5;
 
+-- Count how many movies were made each year:
 SELECT year, COUNT(year)
 FROM topmovies
 GROUP BY year;
 
+/* Create gross rating for movies - 
+if overseas amount is more than 1000 then Excellent,
+if overseas amount is more than 500 then Good,
+everything else is Ok:*/
 SELECT title, overseas,
      CASE
      WHEN overseas > 1000 THEN "EXCELLENT"
@@ -159,6 +175,7 @@ SELECT title, overseas,
      END AS gross_rating
 FROM topmovies;
 
+-- Count how many movies with excellent, good, and ok gross rating:
 SELECT COUNT(*),
      CASE
      WHEN overseas > 1000 THEN "EXCELLENT"
