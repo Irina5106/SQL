@@ -1,5 +1,5 @@
---- Check out my clothes store database here. 
---- Notice how I've described each piece of code - first I created a store database, then displayed the database ordered by price and used aggregation.
+-- Check out my clothes store database here. 
+-- Notice how I've described each piece of code - first I created a store database, then displayed the database ordered by price and used aggregation.
 
 CREATE TABLE my_clothes (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, sex TEXT, price INTEGER);
 
@@ -19,21 +19,21 @@ INSERT INTO my_clothes VALUES (13, "women_hoodies", 10, "F", 55.99);
 INSERT INTO my_clothes VALUES (14, "men_jeans", 8, "M", 45.99);
 INSERT INTO my_clothes VALUES (15, "women_jeans", 7, "F", 45.99);
 
---- display the database ordered by price.
+-- display the database ordered by price.
 SELECT * 
 FROM my_clothes
 ORDER BY price;
 
---- what is the total price of items?
+-- what is the total price of items?
 SELECT SUM(price) FROM my_clothes; 
 
---- what is the maximum price?
+-- what is the maximum price?
 SELECT MAX(price) FROM my_clothes;
 
---- what is the avg price of items?
+-- what is the avg price of items?
 SELECT AVG(price) FROM my_clothes;
 
---- what are the 5 items with the highest price?
+-- what are the 5 items with the highest price?
 SELECT * FROM my_clothes
 ORDER BY price DESC
 LIMIT 5; 
