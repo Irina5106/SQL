@@ -1,0 +1,155 @@
+/* I created tables about famous people and what they do here using Joins */
+
+CREATE TABLE movie_stars (id INTEGER PRIMARY KEY, 
+    star_id INTEGER,   
+    full_name TEXT,
+    birthday INTEGER,
+    birth_year INTEGER);
+    
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (10, "Zoe Saldana", "06-19-1978", "1978");    
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (9, "Chris Pratt", "06-21-1979", "1979");
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (8, "Ryan Reynolds", "10-23-1976", "1976");
+ INSERT INTO movie_stars (star_id, full_name,  birthday, birth_year)  
+    VALUES (7, "Blake Lively", "08-25-1987", "1987");
+INSERT INTO movie_stars (star_id, full_name,  birthday, birth_year)
+    VALUES (6, "Ryan Gosling", "11-12-1980", "1980");
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (5, "Emma Stone", "11-06-1988", "1988");
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (4, "Brad Pitt", "12-18-1963", "1963");
+INSERT INTO movie_stars (star_id, full_name,  birthday, birth_year)
+    VALUES (3, "Angelina Jolie", "06-04-1975", "1975");
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (2, "Leonardo DiCaprio", "11-11-1974", "1974");
+INSERT INTO movie_stars (star_id, full_name, birthday, birth_year)
+    VALUES (1, "Kate Winslet", "10-05-1975", "1975");
+    
+CREATE TABLE star_hobbies (id INTEGER PRIMARY KEY,
+    star_id INTEGER,
+    hobby TEXT);
+    
+INSERT INTO star_hobbies (star_id, hobby) 
+    VALUES ("10", "dancing");    
+INSERT INTO star_hobbies (star_id, hobby) 
+    VALUES ("9", "fishing");
+INSERT INTO star_hobbies (star_id, hobby) 
+    VALUES ("8", "traveling");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("7", "cooking");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("6", "knitting");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("5", "reading");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("4", "dancing");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("3", "flying");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("2", "riding bicycle");
+INSERT INTO star_hobbies (star_id, hobby)
+    VALUES ("1", "fossil hunting");
+
+CREATE TABLE top_grossing_movie (id INTEGER PRIMARY KEY, 
+    star_id INTEGER, 
+    movie TEXT,
+    total_$ INTEGER, 
+    movie_year INTEGER);
+    
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (10, "Avatar", "2923.7", "2009"); 
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (9, "Avengers:Endgame", "2797.5", "2019");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (8, "Deadpool", "782.6", "2018");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (7, "Green Lantern", "219.8", "2011");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (6, "La La Land", "471.9", "2016");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (5, "The Amazing Spider-Man", "757.9", "2012");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (4, "World War Z", "540.4", "2013");   
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (3, "Maleficent", "759.8", "2014");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (2, "Titanic", "2257.8", "1997");
+INSERT INTO top_grossing_movie (star_id, movie, total_$, movie_year)
+    VALUES (1, "Titanic", "2257.8", "1997");
+
+CREATE TABLE stars_firstmovie (id INTEGER PRIMARY KEY,
+    star_id INTEGER,
+    first_movie TEXT,
+    year INTEGER);
+
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("10", "Center Stage", "2000");
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("9", "Cursed:Part3", "2000");
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("8", "Ordinary Magic", "1993");
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("7", "Trixie, the Tooth Fairy", "1998");   
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("6", "Frankenstein and Me", "1996");
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("5", "Superbad", "2007");
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("4", "The Dark Side of the Sun", "1988"); 
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("3", "Lookin' to Get Out", "1982"); 
+INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("2", "Critters 3", "1991");    
+ INSERT INTO stars_firstmovie (star_id, first_movie, year)
+    VALUES ("1", "Dark Season", "1991");   
+    
+SELECT * FROM movie_stars;
+SELECT * FROM star_hobbies;
+SELECT * FROM top_grossing_movie;
+
+/* Join 2 tables to see the movie star and its movie:*/ 
+SELECT a.full_name, b.movie
+FROM movie_stars a
+JOIN top_grossing_movie b
+ON a.star_id = b.star_id;
+
+-- Select top grossing movies in descending order:
+SELECT movie, total_$ FROM top_grossing_movie
+ORDER BY total_$ DESC;
+
+/* Multiple joins - select names, hobbies and movie of the star:*/
+SELECT a.star_id, a.full_name, b.hobby, c.movie
+FROM movie_stars a
+JOIN star_hobbies b
+ON a.star_id = b.star_id
+JOIN top_grossing_movie c
+ON a.star_id = c.star_id
+ORDER BY hobby;
+
+
+/* Here I wanted to know how many years passed from the first movie to the top grossing movie of the stars:*/
+SELECT a.full_name, b.movie_year, c.year, b.movie_year - c.year AS years_passed
+FROM movie_stars a
+JOIN top_grossing_movie b
+ON a.star_id = b.star_id
+JOIN stars_firstmovie c
+ON a.star_id = c.star_id
+GROUP BY a.full_name
+ORDER BY years_passed;
+
+/* Here I wanted to see at what age the stars began their career:*/
+SELECT a. full_name, b.year - a.birth_year AS first_movie_age
+FROM movie_stars a
+JOIN stars_firstmovie b
+ON a.star_id = b.star_id
+ORDER BY first_movie_age;
+
+/* Here I wanted to use OR clause to see which stars have a particular hobby:*/
+SELECT movie_stars.full_name, star_hobbies.hobby
+FROM movie_stars
+JOIN star_hobbies
+ON movie_stars.star_id = star_hobbies.star_id
+WHERE star_hobbies.hobby = "dancing" OR star_hobbies.hobby = "reading"
+ORDER BY movie_stars.full_name;
